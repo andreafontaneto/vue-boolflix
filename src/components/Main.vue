@@ -25,7 +25,8 @@ export default {
     return{
       callAPI: 'https://api.themoviedb.org/3/search/movie',
       apiKey: 'ad0975316f208f153593af06f9245a6b',
-      query: 'ritorno al futuro',
+      language: 'it-IT',
+      query: 'matrix',
       films: []
     }
   },
@@ -33,7 +34,7 @@ export default {
   methods: {
 
     getApi(){
-      axios.get(this.callAPI+'?api_key='+this.apiKey+'&query='+this.query)
+      axios.get(this.callAPI+'?api_key='+this.apiKey+'&language='+this.language+'&query='+this.query)
       .then( r => {
         console.log(r.data.results);
         this.films = r.data.results;
