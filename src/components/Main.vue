@@ -1,7 +1,7 @@
 <template>
   <main>
     
-    <div v-for="film in films" :key="film.id" class="card">
+    <div v-for="film in filmsProps" :key="film.id" class="card">
       <h3 class="title">{{film.title}}</h3>
       <p class="original-title">
         Titolo originale:<br>
@@ -19,9 +19,13 @@
 export default {
   name: 'Main',
 
+  props: {
+    filmsProps: Array
+  },
+
   data(){
     return{
-      films: []
+      
     }
   },
 

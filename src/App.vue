@@ -2,7 +2,7 @@
 
   <div>
     <Header @startSearch="getFilms" />
-    <Main />
+    <Main :filmsProps="films"/>
   </div>
   
 </template>
@@ -27,17 +27,13 @@ export default {
       type: 'movie',
       apiKey: 'ad0975316f208f153593af06f9245a6b',
       language: 'it-IT',
-      query: ''
+      query: '',
+      films: []
     }
   },
 
   methods: {
 
-    getFilms(text){
-      console.log(text);
-      this.query = text;
-      this.getAPI();
-    },
     getAPI(){
       axios.get(this.callAPI+this.type+'?api_key='+this.apiKey+'&language='+this.language+'&query='+this.query)
       .then( r => {
@@ -47,13 +43,16 @@ export default {
       .catch( e => {
         console.log(e);
       })
+    },
+
+    getFilms(text){
+      console.log(text);
+      this.query = text;
+      this.getAPI();
     }
 
-  },
-
-  mounted(){
-    this.getAPI();
   }
+
 }
 </script>
 
