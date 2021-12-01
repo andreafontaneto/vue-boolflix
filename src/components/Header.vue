@@ -4,8 +4,9 @@
     <h1>BOOLFLIX</h1>
 
     <div class="search-box">
-      <input type="text" placeholder="Cerca il film o serie tv...">
-      <button>CERCA</button>
+      <input v-model="textToSearch" @keyup.enter="$emit('startSearch', textToSearch)"
+      type="text" placeholder="Cerca il film o serie tv...">
+      <button @click="$emit('startSearch', textToSearch)">CERCA</button>
     </div>
 
 
@@ -14,7 +15,13 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+
+  data(){
+    return{
+      textToSearch: ''
+    }
+  }
 }
 </script>
 

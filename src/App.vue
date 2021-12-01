@@ -1,13 +1,16 @@
 <template>
 
   <div>
-    <Header />
+    <Header @startSearch="getFilms" />
     <Main />
   </div>
   
 </template>
 
 <script>
+
+import axios from 'axios';
+
 import Header from "./components/Header.vue";
 import Main from "./components/Main.vue";
 
@@ -16,6 +19,40 @@ export default {
   components: {
     Header,
     Main
+  },
+
+  data(){
+    return{
+      callAPI: 'https://api.themoviedb.org/3/search/',
+      type: 'movie',
+      apiKey: 'ad0975316f208f153593af06f9245a6b',
+      language: 'it-IT',
+      query: ''
+    }
+  },
+
+  methods: {
+
+    getFilms(text){
+      console.log(text);
+      this.query = text;
+      this.getAPI();
+    },
+    getAPI(){
+      axios.get(this.callAPI+this.type+'?api_key='+this.apiKey+'&language='+this.language+'&query='+this.query)
+      .then( r => {
+        console.log(r.data.results);
+        this.films = r.data.results;
+      })
+      .catch( e => {
+        console.log(e);
+      })
+    }
+
+  },
+
+  mounted(){
+    this.getAPI();
   }
 }
 </script>
