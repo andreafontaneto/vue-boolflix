@@ -1,21 +1,51 @@
 <template>
   <main>
-    
-    <div v-for="film in filmsProps" :key="film.id" class="card">
-      <h3 class="title">{{film.title}}</h3>
-      <p class="original-title">
-        Titolo originale:<br>
-        {{film.original_title}}
-      </p>
-      <p class="lang">Lingua: {{film.original_language}}</p>
 
-      <div class="flags">
-        <img v-if="film.original_language === 'it'" :src="flags.ita" alt="" class="flag">
-        <img v-else :src="flags.eng" alt="" class="flag">
+    <h2>FILMS</h2>
+
+    <div class="films-box">
+
+      <div v-for="film in filmsProps" :key="film.id" class="card">
+        <h3 class="title">{{film.title}}</h3>
+        <p class="original-title">
+          Titolo originale:<br>
+          {{film.original_title}}
+        </p>
+        <p class="lang">Lingua: {{film.original_language}}</p>
+
+        <div class="flags">
+          <img v-if="film.original_language === 'it'" :src="flags.ita" alt="" class="flag">
+          <img v-else :src="flags.eng" alt="" class="flag">
+        </div>
+
+        <p class="rate">Voto: {{film.vote_average}}</p>
       </div>
 
-      <p class="rate">Voto: {{film.vote_average}}</p>
     </div>
+
+    <h2>SERIE TV</h2>
+
+    <div class="series-box">
+
+      <div v-for="serie in seriesProps" :key="serie.id" class="card">
+        <h3 class="title">{{serie.name}}</h3>
+        <p class="original-title">
+          Titolo originale:<br>
+          {{serie.original_name}}
+        </p>
+        <p class="lang">Lingua: {{serie.original_language}}</p>
+
+        <div class="flags">
+          <img v-if="serie.original_language === 'it'" :src="flags.ita" alt="" class="flag">
+          <img v-else :src="flags.eng" alt="" class="flag">
+        </div>
+
+        <p class="rate">Voto: {{serie.vote_average}}</p>
+      </div>
+
+
+    </div>
+    
 
   </main>
 </template>
@@ -26,7 +56,8 @@ export default {
   name: 'Main',
 
   props: {
-    filmsProps: Array
+    filmsProps: Array,
+    seriesProps: Array
   },
 
   data(){
@@ -50,9 +81,14 @@ main{
   // height: calc(100vh - 80px);
   background-color: rgb(44, 44, 44);
   padding: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
+  .films-box,
+  .series-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
 
   .card{
     width: 250px;

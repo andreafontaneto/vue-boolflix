@@ -1,8 +1,8 @@
 <template>
 
   <div>
-    <Header @startSearch="getFilms" />
-    <Main :filmsProps="films"/>
+    <Header @startSearch="getFilms(); getSeries();" />
+    <Main :filmsProps="films" :seriesProps="series"/>
   </div>
   
 </template>
@@ -23,25 +23,37 @@ export default {
 
   data(){
     return{
-      callAPI: 'https://api.themoviedb.org/3/search/movie',
+      callAPI: 'https://api.themoviedb.org/3/search/',
+      typeMovies: 'movie', 
+      typeSeries: 'tv', 
       apiParams: {
         api_key: 'ad0975316f208f153593af06f9245a6b',
         language: 'it-IT',
         query: ''
       },
-      films: []
+      films: [],
+      series: []
     }
   },
 
   methods: {
 
     getAPI(){
-      axios.get(this.callAPI, {params: this.apiParams})
+      axios.get(this.callAPI+this.typeMovies, {params: this.apiParams})
       .then( r => {
         console.log(r.data.results);
         this.films = r.data.results;
+      })
+      .catch( e => {
+        console.log(e);
+      })
+    },
 
-        
+    getAPIseries(){
+      axios.get(this.callAPI+this.typeSeries, {params: this.apiParams})
+      .then( r => {
+        console.log(r.data.results);
+        this.series = r.data.results;
       })
       .catch( e => {
         console.log(e);
@@ -52,6 +64,12 @@ export default {
       console.log(text);
       this.apiParams.query = text;
       this.getAPI();
+    },
+
+    getSeries(text){
+      console.log(text);
+      this.apiParams.query = text;
+      this.getAPIseries();
     }
 
   }
