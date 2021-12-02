@@ -8,6 +8,12 @@
         {{film.original_title}}
       </p>
       <p class="lang">Lingua: {{film.original_language}}</p>
+
+      <div class="flags">
+        <img v-if="film.original_language === 'it'" :src="flags.ita" alt="" class="flag">
+        <img v-else :src="flags.eng" alt="" class="flag">
+      </div>
+
       <p class="rate">Voto: {{film.vote_average}}</p>
     </div>
 
@@ -25,7 +31,10 @@ export default {
 
   data(){
     return{
-
+      flags: {
+        ita: require('../assets/img/it.png'),
+        eng: require('../assets/img/en.png')
+      }
     }
   },
 
@@ -64,6 +73,17 @@ main{
       font-size: 12px;
       padding-bottom: 20px;
     }
+
+    .flags{
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: center;
+
+      .flag{
+        width: 50px;
+      }
+    }
+
   }
 }
 

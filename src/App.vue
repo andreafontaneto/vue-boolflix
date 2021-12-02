@@ -25,7 +25,7 @@ export default {
     return{
       callAPI: 'https://api.themoviedb.org/3/search/movie',
       apiParams: {
-        apiKey: 'ad0975316f208f153593af06f9245a6b',
+        api_key: 'ad0975316f208f153593af06f9245a6b',
         language: 'it-IT',
         query: ''
       },
