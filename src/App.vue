@@ -2,7 +2,7 @@
 
   <div>
     <Header @startSearch="startSearch" />
-    <Main :filmsProps="films" :seriesProps="series" />
+    <Main :filmsProps="films" :seriesProps="series" :errorMsg="errorMsg" />
   </div>
   
 </template>
@@ -32,7 +32,8 @@ export default {
         query: ''
       },
       films: [],
-      series: []
+      series: [],
+      errorMsg: false
     }
   },
 
@@ -41,7 +42,7 @@ export default {
     getAPIMovies(){
       axios.get(this.callAPI+this.typeMovies, {params: this.apiParams})
       .then( r => {
-        console.log(r.data.results);
+        //console.log(r.data.results);
         this.films = r.data.results;
       })
       .catch( e => {
@@ -52,7 +53,7 @@ export default {
     getAPIseries(){
       axios.get(this.callAPI+this.typeSeries, {params: this.apiParams})
       .then( r => {
-        console.log(r.data.results);
+        //console.log(r.data.results);
         this.series = r.data.results;
       })
       .catch( e => {
@@ -71,6 +72,10 @@ export default {
       this.apiParams.query = text;
       console.log(this.apiParams);
       this.getAPIMovies();
+
+      if(!this.films.title.includes(this.apiParams.query)){
+        this.errorMsg = true;
+      }
     },
 
     getSeries(text){
@@ -78,6 +83,10 @@ export default {
       this.apiParams.query = text;
       console.log(this.apiParams);
       this.getAPIseries();
+
+      if(!this.series.name.includes(this.apiParams.query)){
+        this.errorMsg = true;
+      }
     }
 
   }
