@@ -1,46 +1,63 @@
 <template>
   <main>
 
-    <h2>FILMS</h2>
+    <h2 v-if="filmsProps.length > 0">FILMS</h2>
 
     <div class="films-box">
 
       <div v-for="film in filmsProps" :key="film.id" class="card">
+
         <h3 class="title">{{film.title}}</h3>
-        <p class="original-title">
+        <p v-if="film.original_title !== film.title" class="original-title">
           Titolo originale:<br>
           {{film.original_title}}
         </p>
-        <p class="lang">Lingua: {{film.original_language}}</p>
 
         <div class="flags">
           <img v-if="film.original_language === 'it'" :src="flags.ita" alt="" class="flag">
-          <img v-else :src="flags.eng" alt="" class="flag">
+          <img v-else-if="film.original_language === 'en'" :src="flags.eng" alt="" class="flag">
+          <p v-else class="lang">Lingua: {{film.original_language}}</p>
         </div>
+        
 
-        <p class="rate">Voto: {{Math.round(film.vote_average/2)}}</p>
+        <i 
+        v-for="(star, index) in 5" :key="index" 
+        :class=" index < Math.round(film.vote_average/2) ? 'fas' : 'far' " 
+        class="fa-star rate">
+        </i>
+
       </div>
 
     </div>
 
-    <h2>SERIE TV</h2>
+
+    
+
+    <h2 v-if="seriesProps.length > 0">SERIE TV</h2>
 
     <div class="series-box">
 
       <div v-for="serie in seriesProps" :key="serie.id" class="card">
+
         <h3 class="title">{{serie.name}}</h3>
-        <p class="original-title">
+        <p v-if="fserie.original_name !== serie.name" class="original-title">
           Titolo originale:<br>
           {{serie.original_name}}
         </p>
-        <p class="lang">Lingua: {{serie.original_language}}</p>
 
         <div class="flags">
           <img v-if="serie.original_language === 'it'" :src="flags.ita" alt="" class="flag">
-          <img v-else :src="flags.eng" alt="" class="flag">
+          <img v-else-if="serie.original_language === 'en'" :src="flags.eng" alt="" class="flag">
+          <p v-else class="lang">Lingua: {{serie.original_language}}</p>
         </div>
+        
 
-        <p class="rate">Voto: {{Math.round(serie.vote_average/2)}}</p>
+        <i 
+        v-for="(star, index) in 5" :key="index" 
+        :class=" index < Math.round(serie.vote_average/2) ? 'fas' : 'far' " 
+        class="fa-star rate">
+        </i>
+
       </div>
 
     </div>
@@ -75,6 +92,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
 
 main{
   // height: calc(100vh - 80px);
