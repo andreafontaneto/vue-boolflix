@@ -95,7 +95,9 @@
 
 
     <div v-if="errorMsg" class="error-message">
-      <p>ERRORE! NON E' STATO TROVATO NIENTE CON QUEL NOME</p>
+      <h1>ERRORE!</h1>
+      <img src="../assets/img/error-404.png" alt="">
+      <p>NON E' STATO TROVATO NESSUN RISULTATO</p>
     </div>
 
   </main>
@@ -234,9 +236,18 @@ main{
   }
 
   .error-message{
+    height: 80vh;
     font-size: 30px;
     font-style: italic;
-    color: tomato;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img{
+      padding: 20px 0;
+    }
   }
 
 

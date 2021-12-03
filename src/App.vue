@@ -44,6 +44,14 @@ export default {
       .then( r => {
         //console.log(r.data.results);
         this.films = r.data.results;
+
+        // ci mette 2 ore
+
+        if(this.films.length == 0){
+          this.errorMsg = true;
+        } else {
+          this.errorMsg = false;
+        }    
       })
       .catch( e => {
         console.log(e);
@@ -55,6 +63,12 @@ export default {
       .then( r => {
         //console.log(r.data.results);
         this.series = r.data.results;
+
+        if(this.films.length == 0){
+          this.errorMsg = true;
+        } else {
+          this.errorMsg = false;
+        }  
       })
       .catch( e => {
         console.log(e);
@@ -72,10 +86,6 @@ export default {
       this.apiParams.query = text;
       console.log(this.apiParams);
       this.getAPIMovies();
-
-      if(!this.films.title.includes(this.apiParams.query)){
-        this.errorMsg = true;
-      }
     },
 
     getSeries(text){
@@ -83,10 +93,6 @@ export default {
       this.apiParams.query = text;
       console.log(this.apiParams);
       this.getAPIseries();
-
-      if(!this.series.name.includes(this.apiParams.query)){
-        this.errorMsg = true;
-      }
     }
 
   }
