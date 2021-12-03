@@ -13,12 +13,15 @@
           {{film.original_title}}
         </p>
 
+        <img v-if="film.poster_path" 
+        :src="`https://image.tmdb.org/t/p/w342/${film.poster_path}`" :alt="film.original_title">
+        <img v-else :src="`https://www.npcmagazine.it/wp-content/themes/fox/images/placeholder.jpg`" :alt="film.original_title">
+
         <div class="flags">
           <img v-if="film.original_language === 'it'" :src="flags.ita" alt="" class="flag">
           <img v-else-if="film.original_language === 'en'" :src="flags.eng" alt="" class="flag">
           <p v-else class="lang">Lingua: {{film.original_language}}</p>
         </div>
-        
 
         <i 
         v-for="(star, index) in 5" :key="index" 
@@ -31,7 +34,7 @@
     </div>
 
 
-    
+
 
     <h2 v-if="seriesProps.length > 0">SERIE TV</h2>
 
@@ -40,10 +43,14 @@
       <div v-for="serie in seriesProps" :key="serie.id" class="card">
 
         <h3 class="title">{{serie.name}}</h3>
-        <p v-if="fserie.original_name !== serie.name" class="original-title">
+        <p v-if="serie.original_name !== serie.name" class="original-title">
           Titolo originale:<br>
           {{serie.original_name}}
         </p>
+
+        <img v-if="serie.poster_path" 
+        :src="`https://image.tmdb.org/t/p/w342/${serie.poster_path}`" :alt="serie.original_name">
+        <img v-else :src="`https://www.npcmagazine.it/wp-content/themes/fox/images/placeholder.jpg`" :alt="serie.original_name">
 
         <div class="flags">
           <img v-if="serie.original_language === 'it'" :src="flags.ita" alt="" class="flag">
@@ -110,7 +117,7 @@ main{
 
   .card{
     width: 250px;
-    height: 400px;
+    // height: 400px;
     background-color: grey;
     color: white;
     padding: 20px;
