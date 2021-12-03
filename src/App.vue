@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <Header @startSearch="getFilms(); getSeries()" />
+    <Header @startSearch="startSearch" />
     <Main :filmsProps="films" :seriesProps="series" />
   </div>
   
@@ -60,15 +60,23 @@ export default {
       })
     },
 
+    startSearch(text){
+      console.log(text);
+      this.getFilms(text);
+      this.getSeries(text);
+    },
+
     getFilms(text){
       console.log(text);
       this.apiParams.query = text;
+      console.log(this.apiParams);
       this.getAPIMovies();
     },
 
     getSeries(text){
       console.log(text);
       this.apiParams.query = text;
+      console.log(this.apiParams);
       this.getAPIseries();
     }
 

@@ -18,7 +18,7 @@
           <img v-else :src="flags.eng" alt="" class="flag">
         </div>
 
-        <p class="rate">Voto: {{Math.round(serie.vote_average/2)}}</p>
+        <p class="rate">Voto: {{Math.round(film.vote_average/2)}}</p>
       </div>
 
     </div>
@@ -40,7 +40,7 @@
           <img v-else :src="flags.eng" alt="" class="flag">
         </div>
 
-        <p class="rate">Voto: {{serie.vote_average}}</p>
+        <p class="rate">Voto: {{Math.round(serie.vote_average/2)}}</p>
       </div>
 
     </div>
