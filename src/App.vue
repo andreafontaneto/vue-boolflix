@@ -1,8 +1,8 @@
 <template>
 
   <div>
-    <Header @startSearch="getFilms(); getSeries();" />
-    <Main :filmsProps="films" :seriesProps="series"/>
+    <Header @startSearch="getFilms(); getSeries()" />
+    <Main :filmsProps="films" :seriesProps="series" />
   </div>
   
 </template>
@@ -38,7 +38,7 @@ export default {
 
   methods: {
 
-    getAPI(){
+    getAPIMovies(){
       axios.get(this.callAPI+this.typeMovies, {params: this.apiParams})
       .then( r => {
         console.log(r.data.results);
@@ -63,7 +63,7 @@ export default {
     getFilms(text){
       console.log(text);
       this.apiParams.query = text;
-      this.getAPI();
+      this.getAPIMovies();
     },
 
     getSeries(text){
